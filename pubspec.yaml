@@ -33,6 +33,9 @@ dependencies:
   intl: any
   html2md: any
   flutter_markdown: any
+  provider: ^5.0.0
+  flutter_svg: ^0.22.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,7 +52,20 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/Logo2.jpg
+    - assets/images/undraw_pilates_gpdb.png
     - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo/Cairo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Cairo/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo/Cairo-Black.ttf
+          weight: 900
   # To add assets to your application, add an assets section, like this:
 
   #   - images/a_dot_ham.jpeg
@@ -65,11 +81,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
