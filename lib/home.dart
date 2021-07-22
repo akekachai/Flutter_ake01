@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app02/global.dart';
+import 'package:flutter_app02/widgets/bottomNavbar.dart';
 
 import 'package:flutter_app02/widgets/category_card.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,9 +23,24 @@ class _Homepage extends State<Homepage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              BottomNavItem(),
-              BottomNavItem(),
-              BottomNavItem(),
+              BottomNavItem(
+                title: "Today",
+                svgScr: "assets/icons/calendar.svg",
+                press: () {},
+                isActive: false,
+              ),
+              BottomNavItem(
+                title: "All Exercise",
+                svgScr: "assets/icons/gym.svg",
+                press: () {},
+                isActive: true,
+              ),
+              BottomNavItem(
+                title: "Setting",
+                svgScr: "assets/icons/Settings.svg",
+                press: () {},
+                isActive: false,
+              ),
             ],
           ),
         ),
@@ -113,25 +130,5 @@ class _Homepage extends State<Homepage> {
             ),
           ],
         ));
-  }
-}
-
-class BottomNavItem extends StatelessWidget {
-  const BottomNavItem({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SvgPicture.asset("assets/icons/calendar.svg"),
-          Text("Today"),
-        ],
-      ),
-    );
   }
 }

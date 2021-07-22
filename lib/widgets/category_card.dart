@@ -53,5 +53,3 @@ class CategoryCard extends StatelessWidget {
     );
   }
 }
-
-void press() {}
