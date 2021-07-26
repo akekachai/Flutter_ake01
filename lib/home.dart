@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app02/global.dart';
+import 'package:flutter_app02/screens/detail_screen.dart';
 import 'package:flutter_app02/widgets/bottomNavbar.dart';
 
 import 'package:flutter_app02/widgets/category_card.dart';
+import 'package:flutter_app02/widgets/search_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Homepage extends StatefulWidget {
@@ -16,34 +18,7 @@ class _Homepage extends State<Homepage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          height: 70,
-          color: Colors.white,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              BottomNavItem(
-                title: "Today",
-                svgScr: "assets/icons/calendar.svg",
-                press: () {},
-                isActive: false,
-              ),
-              BottomNavItem(
-                title: "All Exercise",
-                svgScr: "assets/icons/gym.svg",
-                press: () {},
-                isActive: true,
-              ),
-              BottomNavItem(
-                title: "Setting",
-                svgScr: "assets/icons/Settings.svg",
-                press: () {},
-                isActive: false,
-              ),
-            ],
-          ),
-        ),
+        bottomNavigationBar: BottomNavBar(),
         body: Stack(
           children: <Widget>[
             Container(
@@ -52,6 +27,7 @@ class _Homepage extends State<Homepage> {
                 color: Color(0xFFF5CE8),
                 image: DecorationImage(
                   image: AssetImage("assets/images/undraw_pilates_gpdb.png"),
+                  fit: BoxFit.fitWidth, //ทำให้รูปพอดีกับหน้าจอ
                 ),
               ),
             ),
@@ -80,19 +56,7 @@ class _Homepage extends State<Homepage> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
                     ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(29.5)),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            hintText: "ค้นหา",
-                            icon: SvgPicture.asset("assets/icons/search.svg"),
-                            border: InputBorder.none),
-                      ),
-                    ),
+                    SearchBar(),
                     Expanded(
                       child: GridView.count(
                         padding: EdgeInsets.all(20),
@@ -114,7 +78,14 @@ class _Homepage extends State<Homepage> {
                           CategoryCard(
                             svgSrc: "assets/icons/Meditation.svg",
                             title: "Meditation",
-                            press: () {},
+                            press: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return DetaliScreens();
+                                }),
+                              );
+                            },
                           ),
                           CategoryCard(
                             svgSrc: "assets/icons/yoga.svg",
