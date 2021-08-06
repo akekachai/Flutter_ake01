@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app02/Home.dart';
-import 'package:intl/number_symbols_data.dart';
 
 //import 'package:flutter_app02/model/member.dart';
 //import 'global.dart' as global;
@@ -17,7 +16,7 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-void checklogin(String username, context) async {
+void checklogin(String username, String password, context) async {
   final response = await http.get(Uri.parse(
       'https://script.google.com/macros/s/AKfycbzvp5TIZmHJrn1oggzz5ih-S8VgwHuHh2d0iWmHtncnfaPKKGQg79U9_uqFG6z7GS96hQ/exec?path=/apiv&query={"names":"' +
           username +
@@ -41,6 +40,7 @@ void checklogin(String username, context) async {
 class _LoginState extends State<Login> {
   late Future<Transaction> futureMember;
   TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   late String messages;
   @override
   void initState() {
@@ -88,16 +88,19 @@ class _LoginState extends State<Login> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: TextField(
+                  child: TextFieldWidget(
+                    hintText: 'password',
                     obscureText: true,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 10.0,
-                    ),
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      icon: Icon(Icons.vpn_key_outlined),
-                    ),
+                    prefixIconData: Icons.vpn_key_outlined,
+                    textEditingController: passwordController,
+                    //textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //   fontSize: 10.0,
+                    // ),
+                    // decoration: InputDecoration(
+                    //   labelText: 'Password',
+                    //   icon: Icon(Icons.vpn_key_outlined),
+                    // ),
                   ),
                 ),
                 Padding(
@@ -108,13 +111,18 @@ class _LoginState extends State<Login> {
                       ElevatedButton(
                         onPressed: () {
                           var user_Txt = usernameController.text;
+                          var password_Txt = passwordController.text;
                           if (user_Txt == "") {
                             print('blank');
                             //showAlertDialog(context);
                             //dialogBuilder(context);
-                            _showDialog(context);
+                            _showDialog(
+                                context, "แจ้งเตือน", "โปรดใส่ username");
+                          } else if (password_Txt == "") {
+                            _showDialog(
+                                context, "แจ้งเตือน", "โปรดใส่ password");
                           } else {
-                            checklogin(user_Txt, context);
+                            checklogin(user_Txt, password_Txt, context);
                           }
                         },
                         child: Text('login'),
@@ -201,10 +209,10 @@ Expanded buildDivider() {
   );
 }
 
-_showDialog(BuildContext context) {
+_showDialog(BuildContext context, String topic, String msg) {
   CupertinoAlertDialog alert = CupertinoAlertDialog(
-    title: Text('My title'),
-    content: Text('My message'),
+    title: Text(topic),
+    content: Text(msg),
     actions: [
       CupertinoDialogAction(
         child: Text('OK'),

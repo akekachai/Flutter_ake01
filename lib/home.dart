@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app02/global.dart';
+
 import 'package:flutter_app02/screens/detail_screen.dart';
 import 'package:flutter_app02/widgets/bottomNavbar.dart';
 
